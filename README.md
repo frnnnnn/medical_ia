@@ -158,12 +158,4 @@ MIT
 - Si no hay datasets de Kaggle disponibles, la app entrena **modelos sintéticos de fallback** automáticamente, evitando caídas al predecir. Cuando agregues los CSV reales y ejecutes `train` de nuevo, los artefactos se reemplazan por los modelos entrenados con datos reales.
 
 
-## Solución de problemas en Windows
 
-**Error al instalar `pandas`/`scikit-learn` (compila con Meson/Ninja / `stdalign.h` / Python 3.13):**
-- Estás usando Python **3.13**. Muchas ruedas precompiladas aún no están disponibles y `pip` intenta compilar desde código fuente.
-- **Arreglo recomendado:** usa **Python 3.12** o **3.11** para este proyecto.
-  - Ejecuta: `windows_setup_py312.bat` (crea un venv con 3.12 y reinstala dependencias).
-- Alternativa: usa **conda/mamba** (ver `windows_setup_conda.txt`).
-
-Si `uvicorn` no se reconoce, activa el entorno: `call .venv\Scripts\activate` o usa `py -m uvicorn app.main:app --host 0.0.0.0 --port 8000`.
