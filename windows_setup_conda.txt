@@ -1,0 +1,6 @@
+# Alternativa con conda/mamba (suele evitar problemas de compilación en Windows)
+# 1) conda create -n medapp python=3.12 -y
+# 2) conda activate medapp
+# 3) pip install -r requirements.txt
+# 4) py models\train_insurance.py && py models\train_diabetes.py && py models\rf_feature_importance.py
+# 5) uvicorn app.main:app --host 0.0.0.0 --port 8000

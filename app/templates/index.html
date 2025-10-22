@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML – Insurance & Diabetes</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Medical Insurance & Diabetes – Web App</h1>
+    <p>Sube modelos a un servicio web con una interfaz gráfica. Ajusta el umbral para diabetes y predice costos de seguro.</p>
+
+    {% if error %}
+      <div class="card" style="border-color:#ef4444">
+        <strong>Error:</strong> {{ error }}
+      </div>
+    {% endif %}
+
+    <div class="grid">
+      <section>
+        <h2>Predicción de Diabetes</h2>
+        <form method="post" action="/predict/diabetes">
+          <div class="grid2">
+            {% for f in diabetes_features %}
+              <label>{{ f }}<input type="number" step="any" name="{{ f }}" required></label>
+            {% endfor %}
+          </div>
+          <label>Umbral (tau): <input type="number" step="0.01" min="0" max="1" name="threshold" value="{{ threshold }}"></label>
+          <button type="submit">Predecir</button>
+        </form>
+        {% if diabetes_result %}
+          <div class="card success">
+            <strong>Probabilidad:</strong> {{ '%.3f'|format(diabetes_result['proba']) }}<br/>
+            <strong>Clase:</strong> {{ diabetes_result['class'] }}
+          </div>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Predicción de Costos de Seguro</h2>
+        <form method="post" action="/predict/insurance">
+          <div class="grid2">
+            {% for f in insurance_features %}
+              {% if f in ['sex','smoker','region'] %}
+                <label>{{ f }}
+                  <select name="{{ f }}">
+                    {% if f=='sex' %}
+                      <option value="male">male</option>
+                      <option value="female">female</option>
+                    {% elif f=='smoker' %}
+                      <option value="yes">yes</option>
+                      <option value="no">no</option>
+                    {% elif f=='region' %}
+                      <option value="southwest">southwest</option>
+                      <option value="southeast">southeast</option>
+                      <option value="northwest">northwest</option>
+                      <option value="northeast">northeast</option>
+                    {% endif %}
+                  </select>
+                </label>
+              {% else %}
+                <label>{{ f }}<input type="number" step="any" name="{{ f }}" required></label>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <button type="submit">Predecir</button>
+        </form>
+        {% if insurance_result %}
+          <div class="card info">
+            <strong>Charges estimados:</strong> {{ '%.2f'|format(insurance_result['charges']) }}
+          </div>
+        {% endif %}
+      </section>
+    </div>
+
+    <hr/>
+    <p>Ver <code>reports/</code> y README para métricas, importancias y metodología.</p>
+  </div>
+</body>
+</html>
