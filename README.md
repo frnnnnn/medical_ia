@@ -1,4 +1,5 @@
 # Medical Insurance & Diabetes ML – Web App (FastAPI)
+## Nombres: Rodrigo Chavez, Omar Torres y Francisco Matus.
 
 Este repositorio contiene **dos modelos** entrenables y utilizables desde una **aplicación web** (FastAPI + Jinja2):
 1) **Regresión lineal** para **costos de seguro médico** (dataset *Insurance* de Kaggle).
