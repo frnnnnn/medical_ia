@@ -130,8 +130,8 @@ Abre http://localhost:8000
 │   └── common.py
 ├── scripts/
 │   └── download_data.py
-├── reports/                  # se generan al entrenar
-├── data/                     # coloca aquí insurance.csv y diabetes.csv si no usas Kaggle API
+├── reports/                 
+├── data/                     
 ├── tests/
 │   └── test_smoke.py
 ├── requirements.txt
